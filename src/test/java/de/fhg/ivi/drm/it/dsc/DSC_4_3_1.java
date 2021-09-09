@@ -1,10 +1,9 @@
-package de.fhg.ivi.drm.it.dsc_4_3_1;
+package de.fhg.ivi.drm.it.dsc;
 
-import de.fhg.ivi.drm.it.AbstractDRMTestBroker;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.BeforeAll;
+import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.BindMode;
 import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.Network;
 import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
@@ -15,20 +14,19 @@ import java.util.Base64;
 import java.util.Map;
 
 @Testcontainers
-@Slf4j
-public abstract class AbstractDRMTestDSC extends AbstractDRMTestBroker {
+public interface DSC_4_3_1 {
 
-    public static final String CONTAINER_IMAGE_DSC = "ghcr.io/international-data-spaces-association/dataspace-connector:4.1.0";
+    String CONTAINER_IMAGE_DSC = "ghcr.io/international-data-spaces-association/dataspace-connector:4.1.0";
 
-    public static final String SERVICE_NAME_DSC = "provider";
-    public static final int SERVICE_PORT_DSC = 8080;
+    String SERVICE_NAME_DSC = "provider";
+    int SERVICE_PORT_DSC = 8080;
 
     @Container
-    static final GenericContainer<?> dscContainer = new GenericContainer<>(CONTAINER_IMAGE_DSC)
+    GenericContainer<?> dscContainer = new GenericContainer<>(CONTAINER_IMAGE_DSC)
             .withExposedPorts(SERVICE_PORT_DSC)
-            .withNetwork(network)
+            .withNetwork(Network.SHARED)
             .withNetworkAliases(SERVICE_NAME_DSC)
-            .withLogConsumer(new Slf4jLogConsumer(log).withPrefix("DSC"))
+            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger(DSC_4_3_1.class)).withPrefix("DSC"))
             .withEnv(
                     Map.of("SECURITY_REQUIRE-SSL", "false",
                             "SERVER_SSL_ENABLED", "false",
@@ -40,18 +38,11 @@ public abstract class AbstractDRMTestDSC extends AbstractDRMTestBroker {
                     Wait.forLogMessage(".*Started ConnectorApplication.*", 1)
             );
 
-    public static final String user = "admin";
-    public static final String password = "password";
-    public static final String dscCredentials = "Basic " +
+    String user = "admin";
+    String password = "password";
+    String dscCredentials = "Basic " +
             Base64.getEncoder().encodeToString((user + ":" + password).getBytes(StandardCharsets.UTF_8));
 
-    static String urlDSC;
-    static String idsDscAccessUrl;
-
-    @BeforeAll
-    public static void init() {
-        urlDSC = "http://" + dscContainer.getHost() + ":" + dscContainer.getFirstMappedPort();
-        idsDscAccessUrl = "http://" + SERVICE_NAME_DSC + ":" + SERVICE_PORT_DSC + "/api/ids/data";
-    }
+    String idsDscAccessUrl = "http://" + SERVICE_NAME_DSC + ":" + SERVICE_PORT_DSC + "/api/ids/data";
 
 }

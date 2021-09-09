@@ -1,8 +1,9 @@
-package de.fhg.ivi.drm.it.dsc_4_3_1;
+package de.fhg.ivi.drm.it;
 
-import de.fhg.ivi.drm.it.TestPlan;
+import de.fhg.ivi.drm.it.broker.Broker_4_0_3;
+import de.fhg.ivi.drm.it.dsc.DSC_5_1_2;
 import de.fhg.ivi.drm.it.infomodel.MultipartParser;
-import de.fhg.ivi.ids.dsc_4_2_0.api.ConnectorIdsBrokerCommunicationApiClient;
+import de.fhg.ivi.ids.dsc_5_1.api.IdsMessagesApiClient;
 import de.fraunhofer.iais.eis.Message;
 import de.fraunhofer.iais.eis.MessageProcessedNotificationMessage;
 import de.fraunhofer.iais.eis.ids.jsonld.Serializer;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.*;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -26,11 +28,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @MicronautTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@DisplayName("DRM Test - DSC 4.3.1")
-public class DRM_Test extends AbstractDRMTestDSC implements TestPlan, TestPropertyProvider {
+@DisplayName("DRM Test - DSC 5.1.2")
+public class DRMv2Test implements Broker_4_0_3, DSC_5_1_2, TestPlan, TestPropertyProvider {
 
     @Inject
-    ConnectorIdsBrokerCommunicationApiClient idsBrokerCommunicationApiClient;
+    IdsMessagesApiClient messagesApiClient;
 
     @Inject
     private Serializer serializer;
@@ -40,10 +42,8 @@ public class DRM_Test extends AbstractDRMTestDSC implements TestPlan, TestProper
     @Override
     public void registerProviderAtBroker() {
         HttpResponse<String> response = null;
-
-        // when
         try {
-            response = idsBrokerCommunicationApiClient.updateAtBroker(dscCredentials, urlBroker + "/infrastructure");
+            response = messagesApiClient.sendConnectorUpdateMessage3(dscCredentials, urlBroker + "/infrastructure");
         } catch (HttpClientResponseException e) {
             fail(e.getStatus() + " - " + e.getMessage() + " - " + e.getResponse().getBody(String.class).orElse(""));
         }
@@ -63,10 +63,8 @@ public class DRM_Test extends AbstractDRMTestDSC implements TestPlan, TestProper
     @Override
     public void queryConnectorsFromBroker() {
         HttpResponse<String> response = null;
-
-        // when
         try {
-            response = idsBrokerCommunicationApiClient.queryBroker(dscCredentials, urlBroker + "/infrastructure", CONNECTOR_QUERY);
+            response = messagesApiClient.sendConnectorUpdateMessage2(dscCredentials, URI.create(urlBroker + "/infrastructure"), CONNECTOR_QUERY);
         } catch (HttpClientResponseException e) {
             fail(e.getStatus() + " - " + e.getMessage() + " - " + e.getResponse().getBody(String.class).orElse(""));
         }
