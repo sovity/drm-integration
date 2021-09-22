@@ -9,22 +9,15 @@
     {
       "@type": "ids:Resource",
       "@id": "https://w3id.org/idsa/autogen/resource/e32c5397-f71c-47b5-a384-c9c4cf568117",
-      "ids:language": [
-        {
-          "@id": "idsc:EN"
-        }
-      ],
       "ids:description": [
         {
-          "@value": "DWD weather warnings for germany.",
-          "@language": "EN"
+          "@value": "DWD weather warnings for germany."
         }
       ],
       "ids:version": "3",
       "ids:title": [
         {
-          "@value": "DWD Weather Warnings",
-          "@language": "EN"
+          "@value": "DWD Weather Warnings"
         }
       ],
       "ids:publisher": "https://dwd.com",
@@ -40,9 +33,6 @@
               "ids:creationDate": "2021-08-10T13:00:00.000Z"
             }
           ],
-          "ids:language": {
-            "@id": "idsc:EN"
-          },
           "ids:created": "2021-08-10T13:00:00.000Z",
           "ids:mediaType": {
             "@type": "ids:IANAMediaType",
@@ -83,28 +73,22 @@
       ],
       "ids:keyword": [
         {
-          "@value": "DWD",
-          "@language": "EN"
+          "@value": "DWD"
         },
         {
-          "@value": "Warnung",
-          "@language": "EN"
+          "@value": "Warnung"
         },
         {
-          "@value": "Kollektion",
-          "@language": "EN"
+          "@value": "Kollektion"
         },
         {
-          "@value": "Unwetter",
-          "@language": "EN"
+          "@value": "Unwetter"
         },
         {
-          "@value": "Alert",
-          "@language": "EN"
+          "@value": "Alert"
         },
         {
-          "@value": "Open Data",
-          "@language": "EN"
+          "@value": "Open Data"
         }
       ],
       "https://w3id.org/mobids/DataCategory": "Klima_und_Wetter",
@@ -114,22 +98,15 @@
     {
       "@type": "ids:Resource",
       "@id": "https://w3id.org/idsa/autogen/resource/e32c5397-f71c-47b5-a384-c9c4cf568118",
-      "ids:language": [
-        {
-          "@id": "idsc:EN"
-        }
-      ],
       "ids:description": [
         {
-          "@value": "Messwerte der Temperatur auf 2m Höhe an den DWD Stationen im Regional Basic Synoptic Network (RBSN).",
-          "@language": "EN"
+          "@value": "Messwerte der Temperatur auf 2m Höhe an den DWD Stationen im Regional Basic Synoptic Network (RBSN)."
         }
       ],
       "ids:version": "3",
       "ids:title": [
         {
-          "@value": "2m Temperatur an RBSN Stationen",
-          "@language": "EN"
+          "@value": "2m Temperatur an RBSN Stationen"
         }
       ],
       "ids:publisher": "https://dwd.com",
@@ -145,9 +122,6 @@
               "ids:creationDate": "2021-08-10T13:00:00.000Z"
             }
           ],
-          "ids:language": {
-            "@id": "idsc:EN"
-          },
           "ids:created": "2021-08-10T13:00:00.000Z",
           "ids:mediaType": {
             "@type": "ids:IANAMediaType",
@@ -188,12 +162,10 @@
       ],
       "ids:keyword": [
         {
-          "@value": "DWD",
-          "@language": "EN"
+          "@value": "DWD"
         },
         {
-          "@value": "Open Data",
-          "@language": "EN"
+          "@value": "Open Data"
         }
       ],
       "https://w3id.org/mobids/DataCategory": "Klima_und_Wetter",
@@ -203,22 +175,15 @@
     {
       "@type": "ids:Resource",
       "@id": "https://w3id.org/idsa/autogen/resource/e32c5397-f71c-47b5-a384-c9c4cf568120",
-      "ids:language": [
-        {
-          "@id": "idsc:EN"
-        }
-      ],
       "ids:description": [
         {
-          "@value": "Standard-Auswertung (1 km Auflösung) der Radarreflektivitätsverteilung (WX-Produkt) erzeugt durch Überlagerung der Reflektivitäten aller Radarstandorte in Deutschland.",
-          "@language": "EN"
+          "@value": "Standard-Auswertung (1 km Auflösung) der Radarreflektivitätsverteilung (WX-Produkt) erzeugt durch Überlagerung der Reflektivitäten aller Radarstandorte in Deutschland."
         }
       ],
       "ids:version": "3",
       "ids:title": [
         {
-          "@value": "Niederschlagsradar",
-          "@language": "EN"
+          "@value": "Niederschlagsradar"
         }
       ],
       "ids:publisher": "https://dwd.com",
@@ -234,9 +199,6 @@
               "ids:creationDate": "2021-08-10T13:00:00.000Z"
             }
           ],
-          "ids:language": {
-            "@id": "idsc:EN"
-          },
           "ids:created": "2021-08-10T13:00:00.000Z",
           "ids:mediaType": {
             "@type": "ids:IANAMediaType",
@@ -277,12 +239,10 @@
       ],
       "ids:keyword": [
         {
-          "@value": "DWD",
-          "@language": "EN"
+          "@value": "DWD"
         },
         {
-          "@value": "Open Data",
-          "@language": "EN"
+          "@value": "Open Data"
         }
       ],
       "https://w3id.org/mobids/DataCategory": "Klima_und_Wetter",

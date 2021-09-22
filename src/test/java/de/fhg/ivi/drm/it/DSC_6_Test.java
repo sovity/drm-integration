@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DisplayName("DRM Test - DSC 6.2.0 - Broker 4.2.3-SNAPSHOT")
-public class DRMv3Test implements Broker_4_2_3, DSC_6_2_0, TestPlan, TestPropertyProvider {
+public class DSC_6_Test implements Broker_4_2_3, DSC_6_2_0, TestPlan, TestPropertyProvider {
 
     @Inject
     IdsMessagesApiClient messagesApiClient;

@@ -18,6 +18,8 @@ public interface Broker_4_2_3 {
     String CONTAINER_IMAGE_BROKER_ELASTICSEARCH = "elasticsearch:7.9.3";
 
     String SERVICE_NAME_BROKER = "broker";
+    String SERVICE_NAME_ELASTICSEARCH = "mobids-elasticsearch";
+
     int SERVICE_PORT_BROKER = 8080;
 
     String CONNECTOR_QUERY = "PREFIX ids: <https://w3id.org/idsa/core/> " +
@@ -40,13 +42,13 @@ public interface Broker_4_2_3 {
     GenericContainer<?> brokerElasticsearchContainer = new GenericContainer<>(CONTAINER_IMAGE_BROKER_ELASTICSEARCH)
             .withExposedPorts(9200)
             .withNetwork(Network.SHARED)
-            .withNetworkAliases("broker-elasticsearch")
+            .withNetworkAliases(SERVICE_NAME_ELASTICSEARCH)
             .withEnv(
-                    Map.of("http.port", "9200",
-                            "http.cors.enabled", "true",
-                            "http.cors.allow-origin", "https://localhost",
-                            "http.cors.allow-headers", "X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization",
-                            "http.cors.allow-credentials", "true",
+                    Map.of("HTTP_PORT", "9200",
+                            "http.cors.enabled", "false",
+//                            "http.cors.allow-origin", "https://broker",
+//                            "http.cors.allow-headers", "X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization",
+//                            "http.cors.allow-credentials", "true",
                             "discovery.type", "single-node"))
             .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger(Broker_4_2_3.class)).withPrefix("BROKER_ELASTIC"))
             .waitingFor(
@@ -60,12 +62,12 @@ public interface Broker_4_2_3 {
             .withNetworkAliases(SERVICE_NAME_BROKER)
             .withEnv(
                     Map.of("SPARQL_ENDPOINT", "http://fuseki:3030/connectorData",
-                            "ELASTICSEARCH_HOSTNAME", "broker-elasticsearch",
+                            "ELASTICSEARCH_HOSTNAME", SERVICE_NAME_ELASTICSEARCH,
                             "SHACL_VALIDATION", "true",
                             "DAPS_VALIDATE_INCOMING", "false",
-                            "COMPONENT_URI", "https://localhost",
-                            "COMPONENT_CATALOGURI", "https://localhost/connectors/"))
-            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger(Broker_4_2_3.class)).withPrefix(SERVICE_NAME_BROKER))
+                            "COMPONENT_URI", "https://broker",
+                            "COMPONENT_CATALOGURI", "https://broker/connectors/"))
+            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("BrokerLog")).withPrefix(SERVICE_NAME_BROKER))
             .dependsOn(brokerElasticsearchContainer, brokerFusekiContainer)
             .waitingFor(
                     Wait.forListeningPort()
