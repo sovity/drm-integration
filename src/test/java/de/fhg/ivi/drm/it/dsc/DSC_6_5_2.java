@@ -14,14 +14,14 @@ import java.util.Base64;
 import java.util.Map;
 
 @Testcontainers
-public interface DSC_6_2_0 extends DSCTest {
-    String CONTAINER_IMAGE_DSC = "ghcr.io/international-data-spaces-association/dataspace-connector:6.2.0";
+public interface DSC_6_5_2 extends DSCTest {
+    String CONTAINER_IMAGE_DSC = "ghcr.io/international-data-spaces-association/dataspace-connector:6.5.2";
 
     @Container
     GenericContainer<?> dscContainer = new GenericContainer<>(CONTAINER_IMAGE_DSC)
             .withExposedPorts(8080)
             .withNetwork(Network.SHARED)
-            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger(DSC_6_2_0.class)).withPrefix("DSC"))
+            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger(DSC_6_5_2.class)).withPrefix("DSC"))
             .withEnv(
                     Map.of("SECURITY_REQUIRE-SSL", "false",
                             "SERVER_SSL_ENABLED", "false",
@@ -29,7 +29,7 @@ public interface DSC_6_2_0 extends DSCTest {
                             "CONFIGURATION_PATH", "/app/conf/config.json",
                             "BOOTSTRAP_ENABLED", "true",
                             "BOOTSTRAP_PATH", "/app/bootstrap"))
-            .withClasspathResourceMapping("config_provider.json", "/app/conf/config.json",
+            .withClasspathResourceMapping("config_provider_6_5_2.json", "/app/conf/config.json",
                     BindMode.READ_ONLY)
             .withClasspathResourceMapping("bootstrap.properties",
                     "/app/bootstrap/bootstrap.properties", BindMode.READ_ONLY)

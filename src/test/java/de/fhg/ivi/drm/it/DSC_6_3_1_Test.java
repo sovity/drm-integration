@@ -1,36 +1,29 @@
 package de.fhg.ivi.drm.it;
 
-import de.fhg.ivi.drm.it.broker.Broker_4_2_3;
-import de.fhg.ivi.drm.it.dsc.DSC_6_2_0;
+import de.fhg.ivi.drm.it.broker.Broker_4_2_7;
+import de.fhg.ivi.drm.it.dsc.DSC_6_3_1;
 import de.fhg.ivi.ids.dsc_5_1.api.IdsMessagesApiClient;
 import de.fhg.ivi.ids.dsc_5_1.api.OfferedResourcesApiClient;
 import de.fhg.ivi.ids.dsc_5_1.model.Link;
 import de.fhg.ivi.ids.dsc_5_1.model.OfferedResourceView;
-import io.micronaut.core.util.CollectionUtils;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.HttpStatus;
 import io.micronaut.http.client.exceptions.HttpClientResponseException;
 import io.micronaut.test.extensions.junit5.annotation.MicronautTest;
-import io.micronaut.test.support.TestPropertyProvider;
 import org.junit.jupiter.api.*;
 
-import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @MicronautTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@DisplayName("DRM Test - DSC 6.2.0 - Broker 4.2.3-SNAPSHOT")
-public class DSC_6_Test implements Broker_4_2_3, DSC_6_2_0, TestPlan, TestPropertyProvider {
+@DisplayName("DRM Test - DSC 6.3.1 - Broker 4.2.7")
+public class DSC_6_3_1_Test implements Broker_4_2_7, DSC_6_3_1, TestPlan {
 
     @Inject
     IdsMessagesApiClient messagesApiClient;
@@ -69,6 +62,7 @@ public class DSC_6_Test implements Broker_4_2_3, DSC_6_2_0, TestPlan, TestProper
 
     @Test
     @Order(3)
+    @Override
     public void registerResourceAtBroker() {
         var view = offeredResourcesApiClient.getAll3(dscCredentials, Optional.empty(), Optional.empty());
         var offeredResourceView = assertDoesNotThrow(() -> view.getBody().orElseThrow());
@@ -85,28 +79,22 @@ public class DSC_6_Test implements Broker_4_2_3, DSC_6_2_0, TestPlan, TestProper
                 });
     }
 
-    private <T> T getHttpResponseOrFail(Supplier<T> call) {
-        try {
-            return call.get();
-        } catch (HttpClientResponseException e) {
-            fail(e.getStatus() + " - " + e.getMessage() + " - " + e.getResponse().getBody(String.class).orElse(""));
-        }
-        throw new RuntimeException("Should fail");
-    }
-
-    private List<String> parseRegisteredConnectors(String queryResult) {
-        return Stream
-                .of(queryResult.trim().split("\\?url\\n<|>\\n<|>"))
-                .filter(s -> !s.isBlank())
-                .collect(Collectors.toList());
-    }
-
-    @Nonnull
+    @Test
+    @Order(4)
     @Override
-    public Map<String, String> getProperties() {
-        return CollectionUtils.mapOf(
-                "micronaut.http.services.dsc.url", "http://" + dscContainer.getHost() + ":" + dscContainer.getFirstMappedPort()
+    public void unregisterConnectorFromBroker() {
+        var response = getHttpResponseOrFail(
+                () -> messagesApiClient.sendConnectorUpdateMessage4(dscCredentials, urlBroker + "/infrastructure")
         );
-    }
 
+        // then
+        assertEquals(HttpStatus.OK, response.getStatus());
+
+        try {
+            messagesApiClient.sendConnectorUpdateMessage2(dscCredentials, URI.create(urlBroker + "/infrastructure"), CONNECTOR_QUERY);
+            fail();
+        } catch (HttpClientResponseException e) {
+            assertTrue(e.getResponse().getBody(String.class).orElseThrow().contains("The index is empty"));
+        }
+    }
 }

@@ -1,11 +1,13 @@
 package de.fhg.ivi.drm.it;
 
-import java.io.IOException;
-
 public interface TestPlan {
 
-    void registerProviderAtBroker() throws IOException;
+    void registerProviderAtBroker();
 
-    void queryConnectorsFromBroker() throws IOException;
+    void queryConnectorsFromBroker();
+
+    void registerResourceAtBroker();
+
+    void unregisterConnectorFromBroker();
 
 }

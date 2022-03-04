@@ -183,29 +183,6 @@
                             </configOptions>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>dsc_4_2_0</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <skipValidateSpec>false</skipValidateSpec>
-                            <strictSpec>false</strictSpec>
-                            <generatorName>micronaut</generatorName>
-                            <output>${project.build.directory}</output>
-                            <inputSpec>${project.basedir}/src/main/resources/openapi/dsc-openapi-4_2_0.yaml</inputSpec>
-                            <modelPackage>de.fhg.ivi.ids.dsc_4_2_0.model</modelPackage>
-                            <apiPackage>de.fhg.ivi.ids.dsc_4_2_0.api</apiPackage>
-                            <invokerPackage>de.fhg.ivi.ids.dsc_4_2_0.invoker</invokerPackage>
-                            <generateAliasAsModel>true</generateAliasAsModel>
-                            <configOptions>
-                                <useReferencedSchemaAsDefault>true</useReferencedSchemaAsDefault>
-                                <clientId>dsc</clientId>
-                                <useOptional>true</useOptional>
-                                <jacksonDatabindNullable>false</jacksonDatabindNullable>
-                            </configOptions>
-                        </configuration>
-                    </execution>
                 </executions>
                 <dependencies>
                     <dependency>
