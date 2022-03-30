@@ -12,14 +12,14 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import java.util.Map;
 
 @Testcontainers
-public interface DSC_7_0_0 extends DSCTest {
-    String CONTAINER_IMAGE_DSC = "ghcr.io/international-data-spaces-association/dataspace-connector:7.0.0";
+public interface DSC_7_0_3 extends DSCTest {
+    String CONTAINER_IMAGE_DSC = "ghcr.io/international-data-spaces-association/dataspace-connector:7.0.3";
 
     @Container
     GenericContainer<?> dscContainer = new GenericContainer<>(CONTAINER_IMAGE_DSC)
             .withExposedPorts(8080)
             .withNetwork(Network.SHARED)
-            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger(DSC_7_0_0.class)).withPrefix("DSC"))
+            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger(DSC_7_0_3.class)).withPrefix("DSC"))
             .withEnv(
                     Map.of("SECURITY_REQUIRE-SSL", "false",
                             "SERVER_SSL_ENABLED", "false",

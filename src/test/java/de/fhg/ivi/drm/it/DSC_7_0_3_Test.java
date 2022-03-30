@@ -1,7 +1,7 @@
 package de.fhg.ivi.drm.it;
 
 import de.fhg.ivi.drm.it.broker.Broker_5_0_0;
-import de.fhg.ivi.drm.it.dsc.DSC_6_3_1;
+import de.fhg.ivi.drm.it.dsc.DSC_7_0_3;
 import de.fhg.ivi.ids.dsc_5_1.api.IdsMessagesApiClient;
 import de.fhg.ivi.ids.dsc_5_1.api.OfferedResourcesApiClient;
 import de.fhg.ivi.ids.dsc_5_1.model.Link;
@@ -22,8 +22,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @MicronautTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@DisplayName("DRM Test - DSC 6.3.1 - Broker 5.0.0")
-public class DSC_6_3_1_Test implements Broker_5_0_0, DSC_6_3_1, TestPlan {
+@DisplayName("DRM Test - DSC 7.0.0 - Broker 5.0.0")
+public class DSC_7_0_3_Test implements Broker_5_0_0, DSC_7_0_3, TestPlan {
 
     @Inject
     IdsMessagesApiClient messagesApiClient;

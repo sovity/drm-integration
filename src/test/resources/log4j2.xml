@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%d{ISO8601} [%thread] %highlight{%level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue} - %encode{%.-10000msg}{CRLF}%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="ConsoleAppender"/>
+        </Root>
+        <!--        <Logger name="org.springframework" level="info" /> -->
+        <Logger name="org.hibernate" level="error"/>
+        <Logger name="io.dataspaceconnector" level="trace" />
+        <Logger name="de" level="trace" />
+        <Logger name="camel-route-logger" level="info"/>
+        <!--        <Logger name="de.fhg.aisec.ids.idscp2" level="TRACE" />-->
+        <!--        <Logger name="de.fhg.aisec.ids.camel.idscp2" level="TRACE" />-->
+    </Loggers>
+</Configuration>
