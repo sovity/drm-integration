@@ -1,5 +1,5 @@
 #
-# Copyright 2020 Fraunhofer Institute for Software and Systems Engineering
+# Copyright 2022 Fraunhofer Institute for Transportation and Infrastructure Systems IVI
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,6 +12,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
+#
+# This file has been copied from
+# https://github.com/International-Data-Spaces-Association/DataspaceConnector/blob/v5.1.2/openapi.yaml
+#
+# Adaptions have been made to this file to be processable by io.kokuwa.micronaut:micronaut-openapi-codegen
 #
 
 openapi: 3.0.1
