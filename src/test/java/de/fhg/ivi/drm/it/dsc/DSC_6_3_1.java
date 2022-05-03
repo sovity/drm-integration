@@ -44,6 +44,7 @@ public interface DSC_6_3_1 extends DSCTest {
                             "CLEARING_HOUSE_URL", "",
                             "CONFIGURATION_PATH", "/app/conf/config.json",
                             "BOOTSTRAP_ENABLED", "true",
+                            "HTTP_TIMEOUT_READ", "20000",
                             "BOOTSTRAP_PATH", "/app/bootstrap"))
             .withClasspathResourceMapping("config_provider.json", "/app/conf/config.json",
                     BindMode.READ_ONLY)

@@ -43,7 +43,8 @@ public interface DSC_7_0_0 extends DSCTest {
                             "CONFIGURATION_PATH", "/app/conf/config.json",
                             "BOOTSTRAP_ENABLED", "true",
                             "BOOTSTRAP_PATH", "/app/bootstrap",
-                    "LOG4J_CONFIGURATION_FILE", "/app/conf/log4j2.xml"))
+                            "HTTP_TIMEOUT_READ", "20000",
+                            "LOG4J_CONFIGURATION_FILE", "/app/conf/log4j2.xml"))
             .withClasspathResourceMapping("config_provider_7_0_0.json", "/app/conf/config.json",
                     BindMode.READ_ONLY)
             .withClasspathResourceMapping("bootstrap.properties",
