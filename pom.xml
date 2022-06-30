@@ -15,7 +15,7 @@
         <version.junit-jupiter-api>5.4.2</version.junit-jupiter-api>
         <version.micronaut>2.5.9</version.micronaut>
         <version.micronaut-openapi-codegen>2.1.9</version.micronaut-openapi-codegen>
-        <version.infomodel>4.0.0</version.infomodel>
+        <version.infomodel>5.0.1</version.infomodel>
         <version.lombok>1.18.20</version.lombok>
     </properties>
 
